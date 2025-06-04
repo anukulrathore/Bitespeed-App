@@ -1,7 +1,11 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { handleIdentify } from './identify.service';
 
-export const IdentifyUser = async (req: Request, res: Response) => {
+export const IdentifyUser = async (
+    req: Request, 
+    res: Response,
+    next: NextFunction
+): Promise<any> => {
     const { email, phoneNumber } = req.body;
     if (!email && !phoneNumber){
         return res.status(400).json({error: "Email or Phone Number are required"});
